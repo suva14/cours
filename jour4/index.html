@@ -159,10 +159,14 @@
                 deleteTask(index) {
                     this.tasks.splice(index, 1);
                 },
-                createTask() {
+                async createTask() {
                     if (this.taskName.trim()) {
                         this.tasks.push(this.taskName);
                         this.taskName = '';
+                        const response = await fetch('localhost:8000/task',{
+                            method: POST,
+                            body: {title: this.taskTitle},
+                        })
 
                         // Déclenche l'animation de décollage de la fusée
                         const rocket = this.$refs.rocket;
